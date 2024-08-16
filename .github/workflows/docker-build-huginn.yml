@@ -76,9 +76,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
           mv ./huginn/patches/*.patch ./huginn-git
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
-          cd ./huginn-git && git am *.patch
+          cd ./huginn-git && git apply *.patch
         shell: bash
 
       - name: Build and push docker image single process

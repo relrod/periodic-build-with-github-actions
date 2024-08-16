@@ -1,33 +1,13 @@
-From 5ad2f1919cc02d4b9d7c746efa7a59690b1f95d9 Mon Sep 17 00:00:00 2001
-From: Emilien Devos <contact@emiliendevos.be>
-Date: Tue, 10 May 2022 19:42:10 +0200
-Subject: [PATCH 1/1] force nokogiri compilation
-
----
- Gemfile      | 2 +-
- Gemfile.lock | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
 diff --git a/Gemfile b/Gemfile
-index d3b094c9..30921ddc 100644
+index 9b088942..cf50b689 100644
 --- a/Gemfile
 +++ b/Gemfile
-@@ -117,7 +117,7 @@ gem 'loofah', '~> 2.0'
+@@ -118,7 +118,7 @@ gem 'loofah', '~> 2.22'
  gem 'mail', '>= 2.8.1'
- gem 'mini_magick', ">= 4.9.4"
+ gem 'mini_magick', ">= 4.12.0"
  gem 'multi_xml'
--gem "nokogiri", ">= 1.10.8"
+-gem "nokogiri", ">= 1.16.6"
 +gem "nokogiri", force_ruby_platform: true
  gem 'omniauth'
- gem 'rails', '~> 6.0.4'
- gem 'sprockets', '~> 3.7.2'
-diff --git a/Gemfile.lock b/Gemfile.lock
-index adda050a..9770c8b0 100644
---- a/Gemfile.lock
-+++ b/Gemfile.lock
-@@ -889,4 +889,4 @@ RUBY VERSION
-    ruby 2.7.6p219
- 
- BUNDLED WITH
--   2.3.10
-+   2.3.26
+ gem 'rails', '~> 6.1.7', '>= 6.1.7.8'
+ gem 'rails-html-sanitizer', '~> 1.6'
