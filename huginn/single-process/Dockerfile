@@ -38,6 +38,7 @@ ENV OUTDATED_DOCKER_REGISTRY=${OUTDATED_DOCKER_REGISTRY}
 
 RUN rm -rf vendor && \
     mv /tmp/vendor . && \
+    ON_HEROKU=true bundle install -j 4 && \
     APP_SECRET_TOKEN=secret DATABASE_ADAPTER=mysql2 ON_HEROKU=true bundle exec rake assets:clean assets:precompile
 
 EXPOSE 3000
