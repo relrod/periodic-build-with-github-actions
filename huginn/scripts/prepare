@@ -27,7 +27,7 @@ $minimal_apt_get_install build-essential checkinstall git-core \
   zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev \
   libncurses5-dev libffi-dev libxml2-dev libxslt-dev curl libcurl4-openssl-dev libicu-dev \
   graphviz libmysqlclient-dev libpq-dev libsqlite3-dev \
-  locales tzdata shared-mime-info iputils-ping libv8-dev nodejs
+  locales tzdata shared-mime-info iputils-ping libv8-dev rsync
 
 echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
 locale-gen
