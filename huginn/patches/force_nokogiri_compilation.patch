@@ -1,15 +1,16 @@
 diff --git a/Gemfile b/Gemfile
-index 9b088942..2c77a011 100644
+index 9b088942..525c9e80 100644
 --- a/Gemfile
 +++ b/Gemfile
-@@ -1,6 +1,6 @@
- source 'https://rubygems.org'
+@@ -51,7 +51,7 @@ gem 'google-cloud-translate', '~> 2.3', require: 'google/cloud/translate'
  
--ruby '>=3.2.4'
-+ruby '>=3.2.0'
+ # Twitter Agents
+ gem 'omniauth-twitter'
+-gem 'twitter', github: 'sferik/twitter' # Must to be loaded before cantino-twitter-stream.
++gem 'twitter'
+ gem 'twitter-stream', github: 'cantino/twitter-stream', branch: 'huginn'
  
- # Ensure github repositories are fetched using HTTPS
- git_source(:github) do |repo_name|
+ # Tumblr Agents
 @@ -118,7 +118,7 @@ gem 'loofah', '~> 2.22'
  gem 'mail', '>= 2.8.1'
  gem 'mini_magick', ">= 4.12.0"
