@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 COPY docker/scripts/prepare /scripts/
 RUN /scripts/prepare
@@ -26,18 +26,16 @@ ENV ADDITIONAL_GEMS=$ADDITIONAL_GEMS
 # Get rid of annoying "fatal: Not a git repository (or any of the parent directories): .git" messages
 RUN git init && \
     bundle config set --local path vendor/bundle && \
-    bundle config set --local without 'test development'
-
-RUN bundle lock --add-platform x86_64-linux && \
-    bundle lock --add-platform aarch64-linux && \
-    APP_SECRET_TOKEN=secret DATABASE_ADAPTER=mysql2 bundle install -j 4
+    bundle config set --local without 'test development' && \
+    bundle lock --update && \
+    APP_SECRET_TOKEN=secret DATABASE_ADAPTER=mysql2 ON_HEROKU=true bundle install -j 4
 
 COPY --chown="$UID:0" ./ /app/
 
 ARG OUTDATED_DOCKER_REGISTRY=false
 ENV OUTDATED_DOCKER_REGISTRY=${OUTDATED_DOCKER_REGISTRY}
 
-RUN APP_SECRET_TOKEN=secret DATABASE_ADAPTER=mysql2 bundle exec rake assets:clean assets:precompile
+RUN APP_SECRET_TOKEN=secret DATABASE_ADAPTER=mysql2 ON_HEROKU=true bundle exec rake assets:clean assets:precompile
 
 EXPOSE 3000
 

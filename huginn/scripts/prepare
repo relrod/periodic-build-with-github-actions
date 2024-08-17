@@ -21,20 +21,30 @@ CLEAR_DOCKER_CACHE=2020-05-28
 minimal_apt_get_install='apt-get install -y --no-install-recommends'
 
 apt-get update
-apt-get dist-upgrade -y --no-install-recommends
+#apt-get dist-upgrade -y --no-install-recommends
 $minimal_apt_get_install software-properties-common
 $minimal_apt_get_install build-essential checkinstall git-core \
   zlib1g-dev libyaml-dev libssl-dev libgdbm-dev libreadline-dev \
   libncurses5-dev libffi-dev libxml2-dev libxslt-dev curl libcurl4-openssl-dev libicu-dev \
   graphviz libmysqlclient-dev libpq-dev libsqlite3-dev \
-  locales tzdata shared-mime-info iputils-ping ruby-dev libv8-dev
-locale-gen en_US.UTF-8
-update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
-#gem update --system --no-document
-gem update bundler --conservative --no-document
-gem uninstall libv8
+  locales tzdata shared-mime-info iputils-ping libv8-dev nodejs
 
-apt-get purge -y python3* rsyslog rsync manpages
+echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
+locale-gen
+update-locale LANG=en_US.UTF-8 LC_CTYPE=en_US.UTF-8
+
+# Literally compile ruby from source because we need a newer one
+# and if we use a newer ubuntu, then other things (gcc) are too new
+git clone https://github.com/rbenv/ruby-build /tmp/ruby-build
+PREFIX=/usr /tmp/ruby-build/install.sh
+ruby-build 3.3.4 /usr
+rm -rf /tmp/ruby-build*
+gem update bundler --conservative --no-document
+
+#gem update --system --no-document
+#gem update bundler --conservative --no-document
+
+apt-get purge -y rsyslog rsync manpages
 apt-get -y clean
 apt-get -y autoremove
 rm -rf /var/lib/apt/lists/*
