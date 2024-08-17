@@ -44,7 +44,6 @@ gem update bundler --conservative --no-document
 #gem update --system --no-document
 #gem update bundler --conservative --no-document
 
-apt-get purge -y rsyslog rsync manpages
 apt-get -y clean
 apt-get -y autoremove
 rm -rf /var/lib/apt/lists/*
